@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tax.calculator.aud"
+            targetNamespace="http://www.tax.calculator.aud">
+  <xsd:element name="salaryInfo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salaryPeriod" maxOccurs="unbounded" nillable="false" type="SalaryPeriodType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="taxInfo" nillable="false">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="taxPeriod" maxOccurs="unbounded" type="TaxPeriodType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="SalaryPeriodType">
+    <xsd:sequence>
+      <xsd:element name="fromDate" maxOccurs="1" nillable="false" type="xsd:date"/>
+      <xsd:element name="toDate" nillable="true" type="xsd:date" maxOccurs="1" minOccurs="0"/>
+      <xsd:element name="monthlySalary" maxOccurs="1" nillable="false" type="xsd:positiveInteger"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TaxPeriodType">
+    <xsd:sequence>
+      <xsd:element name="taxOnSalaryRange" nillable="false" type="TaxOnSalaryRangeType"/>
+      <xsd:element name="taxOnTotalSalary" minOccurs="0" nillable="true" type="TaxOnTotalSalaryType"/>
+    </xsd:sequence>
+    <xsd:attribute name="startDate" use="required" type="xsd:date"/>
+    <xsd:attribute name="endDate" use="optional" type="xsd:date"/>
+  </xsd:complexType>
+  <xsd:complexType name="TaxOnTotalSalaryType">
+    <xsd:sequence>
+      <xsd:element name="taxRate" nillable="false" maxOccurs="1" type="xsd:decimal"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TaxOnSalaryRangeType">
+    <xsd:sequence>
+      <xsd:element name="salaryFrom" nillable="false" maxOccurs="1" type="xsd:integer"/>
+      <xsd:element name="SalaryTo" maxOccurs="1" nillable="true" type="xsd:positiveInteger" minOccurs="0"/>
+      <xsd:element name="taxRate" maxOccurs="1" nillable="false" type="xsd:decimal"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
